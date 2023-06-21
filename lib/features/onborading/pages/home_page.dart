@@ -8,6 +8,7 @@ import 'package:riverpod_todo/common/widgets/appstyle.dart';
 import 'package:riverpod_todo/common/widgets/custom_text.dart';
 import 'package:riverpod_todo/common/widgets/reusable_text.dart';
 import 'package:riverpod_todo/common/widgets/xpansion_title.dart';
+import 'package:riverpod_todo/features/todo/widgets/todo_tile.dart';
 
 import '../../../common/utils/constants.dart';
 import '../../../common/widgets/height_spacer.dart';
@@ -180,6 +181,18 @@ class _HomePageState extends ConsumerState<HomePage>
                       Container(
                         color: AppConst.kBkLight,
                         height: AppConst.kHeight * 0.3,
+                        child: ListView(
+                          children: [
+                            TodoTile(
+                              start: "03:00",
+                              end: "05:00",
+                              switcher: Switch(
+                                value: false,
+                                onChanged: (value) {},
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       Container(
                         color: AppConst.kBkLight,

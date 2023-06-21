@@ -39,9 +39,9 @@ class BottomTile extends StatelessWidget {
                     borderRadius: BorderRadius.all(
                       Radius.circular(AppConst.kRadius),
                     ),
+                    // TODO: Add color provider
                     color: AppConst.kGreen,
                   ),
-                  // TODO: Add color provider
                 );
               },
             ),
