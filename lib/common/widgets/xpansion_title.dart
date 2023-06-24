@@ -9,11 +9,15 @@ class XpansionTile extends StatelessWidget {
     Key? key,
     required this.text,
     required this.text2,
+    this.onExpansionChanged,
+    this.trailing,
     required this.children,
   }) : super(key: key);
 
   final String text;
   final String text2;
+  final void Function(bool)? onExpansionChanged;
+  final Widget? trailing;
   final List<Widget> children;
 
   @override
@@ -37,6 +41,10 @@ class XpansionTile extends StatelessWidget {
             text2: text2,
           ),
           tilePadding: EdgeInsets.zero,
+          childrenPadding: EdgeInsets.zero,
+          onExpansionChanged: onExpansionChanged,
+          controlAffinity: ListTileControlAffinity.trailing,
+          trailing: trailing,
           children: children,
         ),
       ),

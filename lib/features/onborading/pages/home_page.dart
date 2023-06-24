@@ -8,6 +8,7 @@ import 'package:riverpod_todo/common/widgets/appstyle.dart';
 import 'package:riverpod_todo/common/widgets/custom_text.dart';
 import 'package:riverpod_todo/common/widgets/reusable_text.dart';
 import 'package:riverpod_todo/common/widgets/xpansion_title.dart';
+import 'package:riverpod_todo/features/todo/controllers/xpansion_provider.dart';
 import 'package:riverpod_todo/features/todo/widgets/todo_tile.dart';
 
 import '../../../common/utils/constants.dart';
@@ -123,7 +124,6 @@ class _HomePageState extends ConsumerState<HomePage>
                 child: TabBar(
                   indicatorSize: TabBarIndicatorSize.label,
                   indicator: BoxDecoration(
-                    // color: AppConst.kGreyLight,
                     color: AppConst.kGreyLight,
                     borderRadius: BorderRadius.circular(AppConst.kRadius),
                   ),
@@ -205,10 +205,34 @@ class _HomePageState extends ConsumerState<HomePage>
               const HeightSpacer(
                 height: 20,
               ),
-              const XpansionTile(
+              XpansionTile(
                 text: "Tomorrow's Task",
                 text2: "Tomorrow's tasks are shown here",
-                children: [],
+                onExpansionChanged: (bool expanded) {
+                  ref.read(xpansionStateProvider.notifier).setStart(expanded);
+                },
+                trailing: Padding(
+                  padding: EdgeInsets.only(right: 12.0.w, top: 25.0.h),
+                  child: ref.watch(xpansionStateProvider)
+                      ? const Icon(
+                          AntDesign.closecircleo,
+                          color: AppConst.kBlueLight,
+                        )
+                      : const Icon(
+                          AntDesign.circledown,
+                          color: AppConst.kGreen,
+                        ),
+                ),
+                children: [
+                  TodoTile(
+                    start: "03:00",
+                    end: "05:00",
+                    switcher: Switch(
+                      value: false,
+                      onChanged: (value) {},
+                    ),
+                  ),
+                ],
               ),
               const HeightSpacer(
                 height: 20,
@@ -223,7 +247,31 @@ class _HomePageState extends ConsumerState<HomePage>
                     .toString()
                     .substring(5, 10),
                 text2: "Day After tomorrow's tasks are shown here",
-                children: [],
+                onExpansionChanged: (bool expanded) {
+                  ref.read(xpansionState0Provider.notifier).setStart(expanded);
+                },
+                trailing: Padding(
+                  padding: EdgeInsets.only(right: 12.0.w, top: 25.0.h),
+                  child: ref.watch(xpansionState0Provider)
+                      ? const Icon(
+                          AntDesign.closecircleo,
+                          color: AppConst.kBlueLight,
+                        )
+                      : const Icon(
+                          AntDesign.circledown,
+                          color: AppConst.kGreen,
+                        ),
+                ),
+                children: [
+                  TodoTile(
+                    start: "03:00",
+                    end: "05:00",
+                    switcher: Switch(
+                      value: false,
+                      onChanged: (value) {},
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
