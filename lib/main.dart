@@ -2,7 +2,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_todo/features/onborading/pages/home_page.dart';
+import 'package:riverpod_todo/features/todo/pages/home_page.dart';
 
 import 'common/utils/constants.dart';
 

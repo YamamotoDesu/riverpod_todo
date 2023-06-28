@@ -14,6 +14,7 @@ import 'package:riverpod_todo/features/todo/widgets/todo_tile.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/widgets/height_spacer.dart';
 import '../../../common/widgets/width_spacer.dart';
+import 'add.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -55,9 +56,21 @@ class _HomePageState extends ConsumerState<HomePage>
                         color: AppConst.kLight,
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      child: const Icon(
-                        Icons.add,
-                        color: AppConst.kBkDark,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const AddTask();
+                              },
+                            ),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.add,
+                          color: AppConst.kBkDark,
+                        ),
                       ),
                     ),
                   ],
