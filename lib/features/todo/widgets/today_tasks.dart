@@ -45,7 +45,17 @@ class TodayTasks extends ConsumerWidget {
           end: data.endTime,
           switcher: Switch(
             value: isCompleted,
-            onChanged: (value) {},
+            onChanged: (value) {
+              ref.read(todoStateProvider.notifier).markAsCompled(
+                    data.id ?? 0,
+                    data.title.toString(),
+                    data.desc.toString(),
+                    1,
+                    data.date.toString(),
+                    data.startTime.toString(),
+                    data.endTime.toString(),
+                  );
+            },
           ),
         );
       },

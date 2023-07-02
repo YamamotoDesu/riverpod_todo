@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_todo/common/widgets/appstyle.dart';
 import 'package:riverpod_todo/common/widgets/reusable_text.dart';
 import 'package:riverpod_todo/common/widgets/width_spacer.dart';
+import 'package:riverpod_todo/features/todo/controllers/todo/todo_provider.dart';
 
 import '../utils/constants.dart';
 import 'height_spacer.dart';
@@ -32,6 +33,8 @@ class BottomTile extends StatelessWidget {
           children: [
             Consumer(
               builder: (context, ref, child) {
+                var color =
+                    ref.read(todoStateProvider.notifier).getRandomColor();
                 return Container(
                   height: 80,
                   width: 5,
@@ -39,8 +42,7 @@ class BottomTile extends StatelessWidget {
                     borderRadius: BorderRadius.all(
                       Radius.circular(AppConst.kRadius),
                     ),
-                    // TODO: Add color provider
-                    color: AppConst.kGreen,
+                    color: color,
                   ),
                 );
               },
