@@ -9,6 +9,9 @@ import 'package:riverpod_todo/common/widgets/height_spacer.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
 import 'package:riverpod_todo/features/todo/controllers/dates/dates_provider.dart';
+import 'package:riverpod_todo/features/todo/controllers/todo/todo_provider.dart';
+
+import '../../../common/models/task_model.dart';
 
 class AddTask extends ConsumerStatefulWidget {
   const AddTask({super.key});
@@ -117,6 +120,31 @@ class _AddTaskState extends ConsumerState<AddTask> {
             ),
             const HeightSpacer(height: 20),
             CustomOtlnBtn(
+              onTap: () {
+                if (title.text.isNotEmpty &&
+                    desc.text.isNotEmpty &&
+                    scheduleDate.isNotEmpty &&
+                    start.isNotEmpty &&
+                    finish.isNotEmpty) {
+                  Task task = Task(
+                    title: title.text,
+                    desc: desc.text,
+                    isCompleted: 0,
+                    date: scheduleDate,
+                    startTime: start.substring(10, 16),
+                    endTime: finish.substring(10, 16),
+                    remind: 0,
+                    repeat: "yes",
+                  );
+                  ref.read(todoStateProvider.notifier).addItem(task);
+                  ref.read(startTimeStateProvider.notifier).setStart('');
+                  ref.read(finishTimeStateProvider.notifier).setStart('');
+                  ref.read(dateStateProvider.notifier).setDate('');
+                  Navigator.pop(context);
+                } else {
+                  print("failed to add task");
+                }
+              },
               width: AppConst.kWidth,
               height: 52.h,
               color: AppConst.kLight,

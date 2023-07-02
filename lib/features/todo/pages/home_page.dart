@@ -8,12 +8,15 @@ import 'package:riverpod_todo/common/widgets/appstyle.dart';
 import 'package:riverpod_todo/common/widgets/custom_text.dart';
 import 'package:riverpod_todo/common/widgets/reusable_text.dart';
 import 'package:riverpod_todo/common/widgets/xpansion_title.dart';
+import 'package:riverpod_todo/features/todo/controllers/todo/todo_provider.dart';
 import 'package:riverpod_todo/features/todo/controllers/xpansion_provider.dart';
 import 'package:riverpod_todo/features/todo/widgets/todo_tile.dart';
 
+import '../../../common/models/task_model.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/widgets/height_spacer.dart';
 import '../../../common/widgets/width_spacer.dart';
+import '../widgets/today_tasks.dart';
 import 'add.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -31,6 +34,7 @@ class _HomePageState extends ConsumerState<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(todoStateProvider.notifier).refresh();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -194,18 +198,7 @@ class _HomePageState extends ConsumerState<HomePage>
                       Container(
                         color: AppConst.kBkLight,
                         height: AppConst.kHeight * 0.3,
-                        child: ListView(
-                          children: [
-                            TodoTile(
-                              start: "03:00",
-                              end: "05:00",
-                              switcher: Switch(
-                                value: false,
-                                onChanged: (value) {},
-                              ),
-                            )
-                          ],
-                        ),
+                        child: const TodayTasks(),
                       ),
                       Container(
                         color: AppConst.kBkLight,
