@@ -12,7 +12,6 @@ import 'package:riverpod_todo/features/todo/controllers/todo/todo_provider.dart'
 import 'package:riverpod_todo/features/todo/controllers/xpansion_provider.dart';
 import 'package:riverpod_todo/features/todo/widgets/todo_tile.dart';
 
-import '../../../common/models/task_model.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/widgets/height_spacer.dart';
 import '../../../common/widgets/width_spacer.dart';
