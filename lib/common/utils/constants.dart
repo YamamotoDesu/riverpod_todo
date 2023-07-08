@@ -27,3 +27,9 @@ List<dynamic> colors = const [
   Color(0xFF20a31E),
   Color(0x58797777),
 ];
+
+String myTitle = "";
+String myDesc = "";
+String mySchedule = "";
+String myStartDate = "";
+String myEndDate = "";

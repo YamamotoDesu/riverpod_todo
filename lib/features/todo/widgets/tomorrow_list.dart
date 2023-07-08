@@ -9,6 +9,7 @@ import 'package:riverpod_todo/features/todo/widgets/todo_tile.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/widgets/xpansion_title.dart';
 import '../controllers/xpansion_provider.dart';
+import '../pages/update_page.dart';
 
 class TomorrowList extends ConsumerWidget {
   const TomorrowList({super.key});
@@ -59,7 +60,21 @@ class TomorrowList extends ConsumerWidget {
               ref.read(todoStateProvider.notifier).deleteTodo(todo.id ?? 0);
             },
             editWidget: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                myTitle = todo.title.toString();
+                myDesc = todo.desc.toString();
+                mySchedule = todo.date.toString();
+                myStartDate = todo.startTime.toString();
+                myEndDate = todo.endTime.toString();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdateTask(
+                      id: todo.id ?? 0,
+                    ),
+                  ),
+                );
+              },
               child: Icon(
                 MdiIcons.circleEditOutline,
                 color: Colors.grey,

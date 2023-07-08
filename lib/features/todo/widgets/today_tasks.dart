@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:riverpod_todo/features/todo/pages/update_page.dart';
 
 import '../../../common/models/task_model.dart';
+import '../../../common/utils/constants.dart';
 import '../controllers/todo/todo_provider.dart';
 import 'todo_tile.dart';
 
@@ -32,7 +34,21 @@ class TodayTasks extends ConsumerWidget {
                 );
           },
           editWidget: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              myTitle = data.title.toString();
+              myDesc = data.desc.toString();
+              mySchedule = data.date.toString();
+              myStartDate = data.startTime.toString();
+              myEndDate = data.endTime.toString();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UpdateTask(
+                    id: data.id ?? 0,
+                  ),
+                ),
+              );
+            },
             child: Icon(
               MdiIcons.circleEditOutline,
               color: Colors.grey,

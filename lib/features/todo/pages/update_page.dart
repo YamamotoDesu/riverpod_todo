@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_todo/common/utils/constants.dart';
-import 'package:riverpod_todo/common/widgets/appstyle.dart';
-import 'package:riverpod_todo/common/widgets/custom_otn_btn.dart';
-import 'package:riverpod_todo/common/widgets/custom_text.dart';
-import 'package:riverpod_todo/common/widgets/height_spacer.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
-import 'package:riverpod_todo/features/todo/controllers/dates/dates_provider.dart';
-import 'package:riverpod_todo/features/todo/controllers/todo/todo_provider.dart';
 
 import '../../../common/models/task_model.dart';
+import '../../../common/widgets/appstyle.dart';
+import '../../../common/widgets/custom_otn_btn.dart';
+import '../../../common/widgets/custom_text.dart';
+import '../../../common/widgets/height_spacer.dart';
+import '../controllers/dates/dates_provider.dart';
+import '../controllers/todo/todo_provider.dart';
 
-class AddTask extends ConsumerStatefulWidget {
-  const AddTask({super.key});
+class UpdateTask extends ConsumerStatefulWidget {
+  const UpdateTask({
+    super.key,
+    required this.id,
+  });
+
+  final int id;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AddTaskState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _UpdateTaskState();
 }
 
-class _AddTaskState extends ConsumerState<AddTask> {
-  TextEditingController title = TextEditingController();
-  TextEditingController desc = TextEditingController();
+class _UpdateTaskState extends ConsumerState<UpdateTask> {
+  final TextEditingController title = TextEditingController(text: myTitle);
+  final TextEditingController desc = TextEditingController(text: myDesc);
 
   @override
   Widget build(BuildContext context) {
+    _initDate();
     var scheduleDate = ref.watch(dateStateProvider);
     var start = ref.watch(startTimeStateProvider);
     var finish = ref.watch(finishTimeStateProvider);
@@ -126,17 +133,15 @@ class _AddTaskState extends ConsumerState<AddTask> {
                     scheduleDate.isNotEmpty &&
                     start.isNotEmpty &&
                     finish.isNotEmpty) {
-                  Task task = Task(
-                    title: title.text,
-                    desc: desc.text,
-                    isCompleted: 0,
-                    date: scheduleDate,
-                    startTime: start.substring(10, 16),
-                    endTime: finish.substring(10, 16),
-                    remind: 0,
-                    repeat: "yes",
-                  );
-                  ref.read(todoStateProvider.notifier).addItem(task);
+                  ref.read(todoStateProvider.notifier).updateItem(
+                        widget.id,
+                        title.text,
+                        desc.text,
+                        0,
+                        scheduleDate,
+                        start,
+                        finish,
+                      );
                   ref.read(startTimeStateProvider.notifier).setStart('');
                   ref.read(finishTimeStateProvider.notifier).setStart('');
                   ref.read(dateStateProvider.notifier).setDate('');
@@ -155,5 +160,13 @@ class _AddTaskState extends ConsumerState<AddTask> {
         ),
       ),
     );
+  }
+
+  void _initDate() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(dateStateProvider.notifier).setDate(mySchedule);
+      ref.read(startTimeStateProvider.notifier).setStart(myStartDate);
+      ref.read(finishTimeStateProvider.notifier).setStart(myEndDate);
+    });
   }
 }

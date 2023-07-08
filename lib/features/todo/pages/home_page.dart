@@ -7,11 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_todo/common/widgets/appstyle.dart';
 import 'package:riverpod_todo/common/widgets/custom_text.dart';
 import 'package:riverpod_todo/common/widgets/reusable_text.dart';
-import 'package:riverpod_todo/common/widgets/xpansion_title.dart';
 import 'package:riverpod_todo/features/todo/controllers/todo/todo_provider.dart';
-import 'package:riverpod_todo/features/todo/controllers/xpansion_provider.dart';
 import 'package:riverpod_todo/features/todo/widgets/day_after_tomorrow_tasks.dart';
-import 'package:riverpod_todo/features/todo/widgets/todo_tile.dart';
 import 'package:riverpod_todo/features/todo/widgets/tomorrow_list.dart';
 
 import '../../../common/utils/constants.dart';
@@ -19,7 +16,7 @@ import '../../../common/widgets/height_spacer.dart';
 import '../../../common/widgets/width_spacer.dart';
 import '../widgets/completed_task.dart';
 import '../widgets/today_tasks.dart';
-import 'add.dart';
+import 'add_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
