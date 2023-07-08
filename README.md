@@ -15,6 +15,11 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+## Onboarding
+<img width="513" alt="image" src="https://github.com/YamamotoDesu/riverpod_todo/assets/47273077/6ed34aab-cc4f-481a-a6ed-f670ac7470bc">
+
+<img width="513" alt="image" src="https://github.com/YamamotoDesu/riverpod_todo/assets/47273077/7a065d09-d456-4c4f-9024-7a50c109fa81">
+
 ## Todos Tile with switcher
 <img width="513" alt="image" src="https://github.com/YamamotoDesu/riverpod_todo/assets/47273077/466c3c59-52b4-4fa1-859a-d315dbdfee72">
 
