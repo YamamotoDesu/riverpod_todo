@@ -34,7 +34,7 @@ class DBHelper {
     );
   }
 
-  static Future<int> createItem(Task task) async {
+  static Future<int> createItem(TaskModel task) async {
     final db = await DBHelper.db();
     final id = db.insert(
       'todos',
@@ -62,7 +62,7 @@ class DBHelper {
     return id;
   }
 
-  static Future<List<Map<String, dynamic>>> getUser() async {
+  static Future<List<Map<String, dynamic>>> getUsers() async {
     final db = await DBHelper.db();
     return db.query('user', orderBy: 'id');
   }

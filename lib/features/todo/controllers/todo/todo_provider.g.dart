@@ -11,7 +11,7 @@ String _$todoStateHash() => r'fab523e8b7f4d2096a0be10d47de65ddab19b40b';
 /// See also [TodoState].
 @ProviderFor(TodoState)
 final todoStateProvider =
-    AutoDisposeNotifierProvider<TodoState, List<Task>>.internal(
+    AutoDisposeNotifierProvider<TodoState, List<TaskModel>>.internal(
   TodoState.new,
   name: r'todoStateProvider',
   debugGetCreateSourceHash:
@@ -20,5 +20,5 @@ final todoStateProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$TodoState = AutoDisposeNotifier<List<Task>>;
+typedef _$TodoState = AutoDisposeNotifier<List<TaskModel>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

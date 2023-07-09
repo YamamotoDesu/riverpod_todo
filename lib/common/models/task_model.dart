@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-Task taskFromJson(String str) => Task.fromJson(json.decode(str));
+TaskModel taskFromJson(String str) => TaskModel.fromJson(json.decode(str));
 
-String taskToJson(Task data) => json.encode(data.toJson());
+String taskToJson(TaskModel data) => json.encode(data.toJson());
 
-class Task {
+class TaskModel {
   int? id;
   String? title;
   String? desc;
@@ -15,7 +15,7 @@ class Task {
   int? remind;
   String? repeat;
 
-  Task({
+  TaskModel({
     this.id,
     this.title,
     this.desc,
@@ -27,7 +27,7 @@ class Task {
     this.repeat,
   });
 
-  Task.fromJson(Map<String, dynamic> json) {
+  TaskModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     desc = json['desc'];

@@ -126,7 +126,7 @@ class _AddTaskState extends ConsumerState<AddTask> {
                     scheduleDate.isNotEmpty &&
                     start.isNotEmpty &&
                     finish.isNotEmpty) {
-                  Task task = Task(
+                  TaskModel task = TaskModel(
                     title: title.text,
                     desc: desc.text,
                     isCompleted: 0,

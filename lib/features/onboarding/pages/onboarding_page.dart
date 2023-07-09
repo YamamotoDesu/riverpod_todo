@@ -10,14 +10,14 @@ import '../../../common/utils/constants.dart';
 import '../widgets/page_one.dart';
 import '../widgets/page_two.dart';
 
-class OnBording extends StatefulWidget {
-  const OnBording({super.key});
+class OnboardingPage extends StatefulWidget {
+  const OnboardingPage({super.key});
 
   @override
-  State<OnBording> createState() => _OnBordingState();
+  State<OnboardingPage> createState() => _OnboardingPagePageState();
 }
 
-class _OnBordingState extends State<OnBording> {
+class _OnboardingPagePageState extends State<OnboardingPage> {
   final PageController pageController = PageController();
 
   @override

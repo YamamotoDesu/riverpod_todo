@@ -9,7 +9,8 @@ import '../../../common/utils/constants.dart';
 import '../../../common/widgets/custom_otn_btn.dart';
 import '../../../common/widgets/custom_text.dart';
 import '../../../common/widgets/height_spacer.dart';
-import 'otp_page.dart';
+import '../../../common/widgets/showDialog.dart';
+import '../controllers/auth_conroller.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -37,6 +38,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       displayNameNoCountryCode: "Japan",
       e164Key: "",
     );
+
+    sendCodeToUser() {
+      if (phone.text.isEmpty) {
+        return showAlertDialog(
+          context: context,
+          message: "Please enter your phone number",
+        );
+      } else if (phone.text.length < 8) {
+        return showAlertDialog(
+          context: context,
+          message: "Please enter a valid phone number",
+        );
+      } else {
+        ref.read(authControllerProvider).sendSms(
+              context: context,
+              phone: '+${country.phoneCode}${phone.text}',
+            );
+      }
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -71,7 +91,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         showCountryPicker(
                           context: context,
                           countryListTheme: CountryListThemeData(
-                            backgroundColor: AppConst.kLight,
+                            backgroundColor: AppConst.kBkDark,
                             bottomSheetHeight: AppConst.kHeight * 0.6,
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(20),
@@ -79,7 +99,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ),
                           ),
                           onSelect: (code) {
-                            setState(() {});
+                            setState(() {
+                              country = code;
+                            });
                           },
                         );
                       },
@@ -103,12 +125,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 padding: const EdgeInsets.all(10.0),
                 child: CustomOtlnBtn(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const OtpPage(),
-                      ),
-                    );
+                    sendCodeToUser();
                   },
                   width: AppConst.kWidth * 0.9,
                   height: AppConst.kHeight * 0.075,

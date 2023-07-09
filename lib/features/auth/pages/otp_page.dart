@@ -1,16 +1,38 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
+
 import 'package:riverpod_todo/common/utils/constants.dart';
 import 'package:riverpod_todo/common/widgets/appstyle.dart';
 import 'package:riverpod_todo/common/widgets/height_spacer.dart';
 import 'package:riverpod_todo/common/widgets/reusable_text.dart';
 
-class OtpPage extends StatelessWidget {
-  const OtpPage({super.key});
+import '../repository/auth_repository.dart';
+
+class OtpPage extends ConsumerWidget {
+  const OtpPage({
+    Key? key,
+    required this.smsCodeId,
+    required this.phone,
+  }) : super(key: key);
+
+  final String smsCodeId;
+  final String phone;
+
+  void verifyOtpCode(BuildContext context, WidgetRef ref, String smsCode) {
+    ref.read(authRepositoryProvider).verifyOtp(
+          context: context,
+          verificationId: smsCodeId,
+          smsCodeId: smsCodeId,
+          smsCode: smsCode,
+          mounted: true,
+        );
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -48,10 +70,14 @@ class OtpPage extends StatelessWidget {
                   length: 6,
                   showCursor: true,
                   onCompleted: (value) {
-                    if (value.length == 6) {}
+                    if (value.length == 6) {
+                      return verifyOtpCode(context, ref, value);
+                    }
                   },
                   onSubmitted: (value) {
-                    if (value.length == 6) {}
+                    if (value.length == 6) {
+                      return verifyOtpCode(context, ref, value);
+                    }
                   },
                 ),
               ),

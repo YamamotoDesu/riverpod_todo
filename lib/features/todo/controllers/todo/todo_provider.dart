@@ -11,14 +11,14 @@ part 'todo_provider.g.dart';
 @riverpod
 class TodoState extends _$TodoState {
   @override
-  List<Task> build() {
+  List<TaskModel> build() {
     return [];
   }
 
   void refresh() async {
     final data = await DBHelper.getItems();
 
-    state = data.map((e) => Task.fromJson(e)).toList();
+    state = data.map((e) => TaskModel.fromJson(e)).toList();
   }
 
   dynamic getRandomColor() {
@@ -27,7 +27,7 @@ class TodoState extends _$TodoState {
     return colors[randomIndex];
   }
 
-  void addItem(Task task) async {
+  void addItem(TaskModel task) async {
     await DBHelper.createItem(task);
     refresh();
   }
@@ -109,7 +109,7 @@ class TodoState extends _$TodoState {
     return dates;
   }
 
-  bool getStatus(Task data) {
+  bool getStatus(TaskModel data) {
     bool? isCompleted;
 
     if (data.isCompleted == 0) {

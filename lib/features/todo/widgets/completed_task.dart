@@ -11,7 +11,7 @@ class CompletedTasks extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Task> listData = ref.watch(todoStateProvider);
+    List<TaskModel> listData = ref.watch(todoStateProvider);
     // List lastMonth = ref.read(todoStateProvider.notifier).last30days();
     var completedList = listData
         .where((element) => element.isCompleted == 1
